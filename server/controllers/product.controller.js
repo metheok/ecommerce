@@ -6,6 +6,7 @@ class ProductContoller {
     try {
       const category = req.query.category;
       const searchQuery = req.query.search;
+
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || 4;
       let filter = {};

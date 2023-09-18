@@ -6,23 +6,13 @@ import routeConfig from "./routeConfigration";
 export default function Routing() {
   return (
     <Routes>
-      {routeConfig.map((route, index) =>
-        route.protected ? (
-          <Route key={index + "route"} element={<ProtectedRoute />}>
-            <Route
-              key={index + "inside"}
-              path={route.path}
-              element={<route.component subPath={route.subPath} />}
-            />
-          </Route>
-        ) : (
-          <Route
-            key={index + "route"}
-            path={route.path}
-            element={<route.component />}
-          />
-        )
-      )}
+      {routeConfig.map((route, index) => (
+        <Route
+          key={index + "route"}
+          path={route.path}
+          element={<route.component />}
+        />
+      ))}
     </Routes>
   );
 }

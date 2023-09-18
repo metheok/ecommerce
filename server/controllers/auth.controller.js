@@ -75,7 +75,9 @@ class AuthController {
       // Compare the password with the stored hash
       const passwordMatch = await comparePassword(password, user.password);
       if (!passwordMatch) {
-        return res.status(401).json({ message: "Invalid credentials pass" });
+        return res
+          .status(401)
+          .json({ message: "Invalid credentials password" });
       }
 
       const userToken = generateToken({ _id: user._id.toString() });

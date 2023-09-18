@@ -1,16 +1,14 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
-const userToken = localStorage.getItem("userToken")
-  ? localStorage.getItem("userToken")
-  : null;
 
 export const productFetch = createAsyncThunk(
   "auth/productFetch",
   async (params, { rejectWithValue, getState }) => {
     try {
       // configure header's Content-Type as JSON
-      const token = userToken;
+      const token = getState().auth.userToken;
+
       if (!token) {
         throw "user token";
       }
@@ -45,7 +43,8 @@ export const categoryFetch = createAsyncThunk(
   async (params, { rejectWithValue, getState }) => {
     try {
       // configure header's Content-Type as JSON
-      const token = userToken;
+      const token = getState().auth.userToken;
+
       if (!token) {
         throw "user token";
       }

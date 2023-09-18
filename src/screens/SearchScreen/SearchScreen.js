@@ -6,7 +6,7 @@ import Loading from "../../components/Loading/Loading.js";
 import { useDispatch } from "react-redux";
 import { logoutAndClearUser } from "../../state/auth/authSlice";
 import { useEffect } from "react";
-import { userUpdate } from "../../state/user/userActions";
+import { userFetch, userUpdate } from "../../state/user/userActions";
 import { categoryFetch, productFetch } from "../../state/search/searchActions";
 import Header from "../../components/Header/Header";
 import CategoryModal from "../../components/CategoryModal/CategoryModal";
@@ -19,6 +19,9 @@ const SearchScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  useEffect(() => {
+    dispatch(userFetch());
+  }, [dispatch]);
 
   const searchFilter = {};
 
@@ -27,13 +30,13 @@ const SearchScreen = () => {
   searchFilter.category = searchParams.get("category") || "";
 
   const { auth, user, search } = state;
-  const { loading, error } = auth;
+  const { loading, userToken, error } = auth;
   const {
     productFetchLoading,
-    productFetchSuccess,
+
     productFetchError,
     categoryFetchLoading,
-    categoryFetchSuccess,
+
     categoryFetchError,
     products,
     categories,
@@ -41,7 +44,6 @@ const SearchScreen = () => {
 
   const { userLoading, userUpdateLoading, userUpdateError, userError } = user;
   useEffect(() => {
-    dispatch(categoryFetch());
     dispatch(productFetch(searchFilter));
   }, [
     dispatch,
@@ -49,24 +51,37 @@ const SearchScreen = () => {
     searchParams.get("category"),
     searchParams.get("page"),
   ]);
-  if (loading || userLoading || categoryFetchLoading) {
+  useEffect(() => {
+    dispatch(categoryFetch());
+  }, []);
+  if (
+    loading ||
+    userLoading ||
+    userUpdateLoading ||
+    productFetchLoading ||
+    categoryFetchLoading ||
+    productFetchError ||
+    categoryFetchError
+  ) {
     return (
       <div>
         <Header
           user={user.user?.user}
-          onShowCategoryModal={() => {
-            changeShowCategoryModal(!showCategoryModal);
-          }}
+          onShowCategoryModal={() => {}}
           className={css.header}
-          showCategoryModal={showCategoryModal}
+          showCategoryModal={() => {}}
           searchText={searchParams.get("q") || ""}
           changeSearch={() => {}}
         />
-        <Loading />
+        {productFetchError || categoryFetchError ? (
+          <p className={css.error}>Failed to fetch data. Please try again.</p>
+        ) : (
+          <Loading />
+        )}
       </div>
     );
   }
-  if (!user.user || userError) {
+  if (!user.user || userError || !userToken) {
     dispatch(logoutAndClearUser());
     return <Navigate to="/login" />;
   }

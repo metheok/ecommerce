@@ -15,6 +15,7 @@ const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
+
   reducers: {
     clearErrors: (state) => {
       state.userLoading = false;
@@ -23,6 +24,9 @@ const userSlice = createSlice({
 
       state.userUpdateError = null;
       state.userUpdateSuccess = false;
+    },
+    userFetchReady: (state) => {
+      state.userLoading = true;
     },
     clearUser: (state) => {
       state.user = null;
@@ -66,7 +70,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearErrors, clearUser } = userSlice.actions;
+export const { clearErrors, clearUser, userFetchReady } = userSlice.actions;
 
 //selectors
 export const isLoading = (state) =>

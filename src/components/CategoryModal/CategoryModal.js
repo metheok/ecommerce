@@ -16,7 +16,7 @@ const CategoryModal = ({
         <Paper className={css.modal}>
           <Typography variant="h6">Select a Category</Typography>
           <div className={css.categoryList}>
-            {categories.map((category) => (
+            {categories?.map((category) => (
               <div
                 key={category._id}
                 onClick={() => handleCategorySelect(category.name)}

@@ -10,18 +10,15 @@ const routeConfig = [
   {
     path: "/search",
     component: SearchScreen,
-    protected: false,
   },
 
   {
     path: "*",
     component: NotFoundScreen,
-    protected: false,
   },
   {
     path: "not-found",
     component: NotFoundScreen,
-    protected: false,
   },
 ];
 

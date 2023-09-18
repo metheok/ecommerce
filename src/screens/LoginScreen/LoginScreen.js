@@ -7,6 +7,8 @@ import { logoutAndClearUser } from "../../state/auth/authSlice";
 import { TextField, Button, Container, Paper } from "@mui/material";
 import { userLogin } from "../../state/auth/authActions";
 import { useNavigate } from "react-router-dom";
+import { userFetch } from "../../state/user/userActions";
+import { userFetchReady } from "../../state/user/userSlice";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -23,13 +25,19 @@ const LoginScreen = () => {
     }
   }, [loginError]);
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    dispatch(userFetch());
+  }, [dispatch]);
   useEffect(() => {
     if (loginSuccess && userToken) {
+      dispatch(userFetchReady());
       navigate("/search");
     }
   }, [loginSuccess, navigate, userToken]);
-  if (user) {
+  if (userLoading) {
+    return <Loading />;
+  }
+  if (user?.user) {
     return <Navigate to="/search" />;
   }
   const login = (e) => {

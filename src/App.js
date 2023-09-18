@@ -11,9 +11,6 @@ function App() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const { auth, user } = state;
-  useEffect(() => {
-    dispatch(userFetch());
-  }, [dispatch]);
 
   return (
     <>

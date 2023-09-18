@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, CardMedia, makeStyles } from "@material-ui/core";
 import Pagination from "@mui/material/Pagination";
 import css from "./Listing.module.css";
-import { Card, CardContent, Typography, Button, Chip } from "@mui/material";
+import { Card, CardContent, Typography, Button } from "@mui/material";
 import { ShoppingCart as ShoppingCartIcon } from "@mui/icons-material";
 const noImg = require("./noImg.png");
 const useStyles = makeStyles((theme) => ({
