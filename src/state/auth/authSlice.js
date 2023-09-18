@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { userLogin } from "./authActions";
 import { clearUser } from "../user/userSlice";
 
-// initialize userToken from local storage
 const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
   : null;

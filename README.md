@@ -2,13 +2,17 @@
 
 Master Repository for E-commerce
 
+To setup project
+
+### `yarn`
+
 To run client and server on concurrently on port 3000 and 4000 respectively
 
-### `npm run dev`
+### `yarn dev`
 
 To run client and server on concurrently on port 3000 and 4000 respectively
 
-### `npm run server`
+### `yarn server`
 
 To run server on port 4000
 

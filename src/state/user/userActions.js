@@ -1,7 +1,5 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-
 export const userFetch = createAsyncThunk(
   "auth/userFetch",
   async (params, { rejectWithValue, getState }) => {
@@ -10,7 +8,7 @@ export const userFetch = createAsyncThunk(
       const token = getState().auth.userToken;
 
       if (!token) {
-        throw "user token";
+        throw { message: "user token" };
       }
       const config = {
         headers: {
@@ -41,7 +39,7 @@ export const userUpdate = createAsyncThunk(
       const token = getState().auth.userToken;
 
       if (!token) {
-        throw "user token";
+        throw { message: "user token" };
       }
       const config = {
         headers: {
