@@ -63,19 +63,19 @@ class AuthController {
     }
 
     if (emailFormatValid(email)) {
-      return res.status(400).json({ errors: ["email format invalid"] });
+      return res.status(400).json({ message: "email format invalid" });
     }
     try {
       // Find the provider in the database
       const user = await User.findOne({ email: email });
 
       if (!user) {
-        return res.status(401).json({ error: "Invalid credentials" });
+        return res.status(401).json({ message: "Invalid credentials" });
       }
       // Compare the password with the stored hash
       const passwordMatch = await comparePassword(password, user.password);
       if (!passwordMatch) {
-        return res.status(401).json({ error: "Invalid credentials pass" });
+        return res.status(401).json({ message: "Invalid credentials pass" });
       }
 
       const userToken = generateToken({ _id: user._id.toString() });

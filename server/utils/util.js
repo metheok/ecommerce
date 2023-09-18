@@ -1,7 +1,5 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const multer = require("multer");
-
 const { Config } = require("../../configs/config");
 
 const generateToken = (user) => {

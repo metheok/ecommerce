@@ -1,0 +1,75 @@
+.listingPage {
+    padding: 20px;
+  }
+  
+  .heading {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+    
+  .productList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .pagination {
+    display: flex;
+    margin: 1rem;
+    justify-content: center;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  .media {
+    height: 0;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+  }
+  
+  .productName {
+    font-weight: 500;
+    font-size: 18px;
+    color: #a6a2a2;
+  }
+  
+  .category {
+    color: #4e4c4c;
+    font-weight: 700;
+    padding-bottom: 2rem;
+
+  }
+  
+  .price {
+    color: #f00; /* Set the color you desire */
+    font-weight: bold;
+    font-size: 22px;
+    margin-top: 16px;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 16px;
+  }
+  
+  .vegNonVeg {
+    font-weight: bold;
+    color: green; /* Set the color for veg or red for non-veg */
+  }
+  
+  .addToCart {
+    background-color: #007bff; /* Set the color you desire */
+    color: white;
+    &:hover {
+      background-color: #0056b3; /* Set the hover color you desire */
+    }
+  }
+  

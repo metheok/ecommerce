@@ -11,7 +11,7 @@ const initialState = {
   loading: false,
   userToken,
   loginError: null,
-  success: false,
+  loginSuccess: false,
 };
 
 const authSlice = createSlice({
@@ -19,7 +19,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      localStorage.removeItem("userToken");
+      // localStorage.removeItem("userToken");
       state.loading = false;
     },
 

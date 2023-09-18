@@ -1,3 +1,4 @@
+const Category = require("../models/category");
 const Product = require("../models/product");
 
 class ProductContoller {
@@ -6,11 +7,25 @@ class ProductContoller {
       const category = req.query.category;
       const searchQuery = req.query.search;
       const page = parseInt(req.query.page) || 1;
-      const limit = parseInt(req.query.limit) || 10;
+      const limit = parseInt(req.query.limit) || 4;
       let filter = {};
       if (category) {
         const categories = category.split(",").map((each) => each.trim());
-        filter.$or = [{ category: { $in: categories } }];
+        const allCatFilter = {
+          $or: [
+            ...categories.map((each) => ({
+              name: { $regex: each, $options: "i" },
+            })),
+          ],
+        };
+
+        const allCategories = await Category.find(allCatFilter);
+
+        filter.$or = [
+          {
+            category: { $in: allCategories.map((each) => each._id.toString()) },
+          },
+        ];
       }
       if (searchQuery) {
         filter.name = { $regex: searchQuery, $options: "i" };
@@ -19,15 +34,10 @@ class ProductContoller {
       const totalPages = Math.ceil(totalCount / limit);
 
       const details = await Product.find(filter, {
-        _id: false,
         __v: false,
       })
         .skip((page - 1) * limit)
         .limit(limit);
-
-      if (details.length === 0) {
-        return res.status(404).json({ message: "No products found." });
-      }
 
       res.json({
         products: details,
@@ -45,11 +55,18 @@ class ProductContoller {
   };
   createProduct = async (req, res, next) => {
     try {
-      const { name, category, image, description, type } = req.body;
+      const { name, category, image, description, price, type } = req.body;
       if (!name || !category) {
         return res.status(400).json({ message: "Arguments not provided" });
       }
-      const product = new Product({ name, category, image, description, type });
+      const product = new Product({
+        name,
+        category,
+        image,
+        price,
+        description,
+        type,
+      });
       const result = await product.save();
       res.json(result);
     } catch (e) {

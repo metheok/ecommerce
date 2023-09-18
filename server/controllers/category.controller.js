@@ -1,14 +1,16 @@
-const Category = require("../models/Category");
+const Category = require("../models/category");
 
 class CategoryContoller {
   fetchAll = async (req, res, next) => {
     try {
-      const totalCount = await Category.countDocuments(filter);
+      const totalCount = await Category.countDocuments();
 
-      const details = await Category.find(filter, {
-        _id: false,
-        __v: false,
-      });
+      const details = await Category.find(
+        {},
+        {
+          __v: false,
+        }
+      );
 
       if (details.length === 0) {
         return res.status(404).json({ message: "No categories found." });
@@ -18,8 +20,6 @@ class CategoryContoller {
         category: details,
 
         pagination: {
-          currentPage: page,
-          totalPages: totalPages,
           totalItems: totalCount,
         },
       });

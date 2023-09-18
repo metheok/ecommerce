@@ -23,3 +23,6 @@
 .middleContent::-webkit-scrollbar-thumb {
 	background-color: #b1b1b1;
 }
+.header{
+	background: green;
+}

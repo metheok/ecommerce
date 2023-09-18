@@ -5,8 +5,8 @@ const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
   : null;
 
-export const userFetch = createAsyncThunk(
-  "auth/userFetch",
+export const productFetch = createAsyncThunk(
+  "auth/productFetch",
   async (params, { rejectWithValue, getState }) => {
     try {
       // configure header's Content-Type as JSON
@@ -20,7 +20,12 @@ export const userFetch = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await axios.get(`/api/user`, config);
+      const { data } = await axios.get(
+        `/api/product?${params.search ? `search=${params.search}&` : ""}${
+          params.category ? `category=${params.category}&` : ""
+        }${params.page ? `page=${params.page}` : ""}`,
+        config
+      );
 
       return data;
     } catch (error) {
@@ -35,8 +40,8 @@ export const userFetch = createAsyncThunk(
   }
 );
 
-export const userUpdate = createAsyncThunk(
-  "auth/userUpdate",
+export const categoryFetch = createAsyncThunk(
+  "auth/categoryFetch",
   async (params, { rejectWithValue, getState }) => {
     try {
       // configure header's Content-Type as JSON
@@ -51,7 +56,7 @@ export const userUpdate = createAsyncThunk(
         },
       };
 
-      const { data } = await axios.patch(`/api/user`, params, config);
+      const { data } = await axios.get(`/api/category`, config);
 
       return data;
     } catch (error) {

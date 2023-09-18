@@ -1,4 +1,4 @@
-import ProductScreen from "../screens/ProductScreen/ProductScreen";
+import SearchScreen from "../screens/SearchScreen/SearchScreen";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
 import NotFoundScreen from "../screens/NotFoundScreen/NotFoundScreen";
 const routeConfig = [
@@ -9,7 +9,7 @@ const routeConfig = [
   },
   {
     path: "/search",
-    component: ProductScreen,
+    component: SearchScreen,
     protected: false,
   },
 

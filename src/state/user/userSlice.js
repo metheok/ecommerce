@@ -4,7 +4,7 @@ import { userFetch, userUpdate } from "./userActions";
 const initialState = {
   user: null,
 
-  userLoading: false,
+  userLoading: true,
   userError: null,
   userSuccess: false,
 

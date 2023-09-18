@@ -15,21 +15,9 @@ function App() {
     dispatch(userFetch());
   }, [dispatch]);
 
-  const { loading } = auth;
-  const { userLoading } = user;
-  if (loading || userLoading) {
-    return <LoadingScreen user={user} auth={auth} />;
-  }
   return (
     <>
-      <div
-        style={{
-          overflow: "hidden",
-        }}
-      >
-        <Row xs={12}>
-          <Header auth={auth} user={user} />
-        </Row>
+      <div>
         <div>
           <Routing />
         </div>

@@ -4,9 +4,8 @@ import { useSelector } from "react-redux";
 
 export const userLogin = createAsyncThunk(
   "auth/login",
-  async ({ email, password, rememberMe }, { rejectWithValue }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
-      // configure header's Content-Type as JSON
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -15,11 +14,10 @@ export const userLogin = createAsyncThunk(
 
       const { data } = await axios.post(
         `/api/auth/login`,
-        { email, password, rememberMe },
+        { email, password },
         config
       );
-
-      // store user's token in local storage
+      console.log(data.userToken);
       localStorage.setItem("userToken", data.userToken);
 
       return data;

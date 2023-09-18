@@ -1,0 +1,54 @@
+/* Header.module.css */
+.appBar {
+    background-color: greenyellow;
+  }
+  
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    color: white;
+    margin: 0 1rem;
+  }
+  
+  .search {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 4px;
+    padding: 0px 12px;
+    margin-left: 16px;
+    flex:1;
+    cursor: pointer;
+
+    margin: 0 2rem;
+  }
+  
+  .searchIcon {
+    padding: 8px;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    color: black;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    outline: none;
+  }
+  
+  .categoryButton {
+    margin-left: 16px;
+    margin: 0,2rem;
+  }
+  
+  .cart {
+    margin-right: 16px;
+    color: white;
+  }
+  
